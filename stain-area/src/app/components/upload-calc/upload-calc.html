@@ -1,0 +1,113 @@
+<div class="space-y-4 p-4 bg-gray-50 rounded">
+  <label class="block text-sm font-medium text-blue-700 mb-2" for="file-upload"
+    >Upload image</label
+  >
+  <div class="flex items-center space-x-4">
+    <div
+      class="flex flex-col items-center px-4 py-6 bg-white text-blue-600 rounded-lg shadow-lg tracking-wide uppercase border border-blue-200 cursor-pointer hover:bg-blue-50 transition relative"
+      (dragover)="$event.preventDefault(); dragActive = true"
+      (dragleave)="dragActive = false"
+      (drop)="onDrop($event)"
+      (click)="onAreaClick($event)"
+      [class.ring-2]="dragActive"
+      [class.ring-blue-400]="dragActive"
+      tabindex="0"
+      role="button"
+      aria-label="Drop image here or click to select"
+      title="Drop image here or click to select"
+    >
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+        <polyline points="7 9 12 4 17 9" />
+        <line x1="12" y1="4" x2="12" y2="16" />
+      </svg>
+      <span class="mt-2 text-base leading-normal">Select or drop a file</span>
+      <input
+        #fileUploadInput
+        id="file-upload"
+        type="file"
+        class="hidden"
+        (change)="onFile($event)"
+        accept="image/*"
+        aria-label="Upload image"
+        tabindex="0"
+      />
+      @if (dragActive) {
+      <span
+        class="absolute inset-0 bg-blue-100 bg-opacity-50 flex items-center justify-center text-blue-700 font-bold text-lg pointer-events-none"
+        >Drop here</span
+      >
+      }
+    </div>
+    @if (imageUrl) {
+    <div class="relative">
+      <img
+        [src]="imageUrl"
+        alt="Uploaded image"
+        [style.width.px]="imageData?.width || 160"
+        [style.height.px]="imageData?.height || 160"
+        class="object-contain border rounded shadow"
+      />
+      @if (pointsOverlay.length) {
+      <canvas
+        #overlayCanvas
+        [width]="imageData?.width || 160"
+        [height]="imageData?.height || 160"
+        [style.width.px]="imageData?.width || 160"
+        [style.height.px]="imageData?.height || 160"
+        class="absolute top-0 left-0 pointer-events-none"
+      ></canvas>
+      }
+    </div>
+    }
+  </div>
+  @if (errorMessage) {
+  <div class="bg-red-100 text-red-700 px-4 py-2 rounded" role="alert">
+    {{ errorMessage }}
+  </div>
+  } @if (showResult) {
+  <div
+    class="bg-green-100 text-green-700 px-4 py-2 rounded mb-2 animate-fade-in"
+    role="status"
+  >
+    {{ resultMessage }}
+  </div>
+  } @if (imageData) {
+  <div class="flex flex-col items-center mt-4">
+    <label
+      class="mb-1"
+      for="points-slider"
+      title="Number of random points to use"
+      >Random Points: <span class="font-semibold">{{ points }}</span></label
+    >
+    <input
+      id="points-slider"
+      type="range"
+      min="100"
+      max="10000"
+      step="100"
+      [(ngModel)]="points"
+      class="w-64 accent-blue-600"
+      aria-label="Random points slider"
+      title="Number of random points to use"
+    />
+    <button
+      (click)="calc()"
+      class="px-6 py-2 bg-blue-600 text-white rounded mt-4 shadow hover:bg-blue-700 transition disabled:opacity-50"
+      [disabled]="!isBinary"
+      aria-label="Calculate area"
+      title="Calculate the estimated area"
+    >
+      Calculate
+    </button>
+  </div>
+  }
+</div>

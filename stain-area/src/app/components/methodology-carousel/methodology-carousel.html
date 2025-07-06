@@ -1,0 +1,53 @@
+<div
+  class="flex space-x-4 overflow-x-auto p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg"
+>
+  <div
+    class="min-w-[320px] bg-white p-4 rounded-lg shadow flex flex-col items-center border border-blue-200"
+  >
+    <span class="font-bold mb-2 text-blue-700">What is a "stain"?</span>
+    <p class="text-sm text-gray-700 text-center">
+      A "stain" is a binary spot in an image, where white pixels represent the
+      spot and black pixels the background. It is used in image analysis to
+      estimate areas of interest.
+    </p>
+  </div>
+  <div
+    class="min-w-[320px] bg-white p-4 rounded-lg shadow flex flex-col items-center border border-blue-200"
+  >
+    <span class="font-bold mb-2 text-blue-700"
+      >How does the calculation work?</span
+    >
+    <p class="text-sm text-gray-700 text-center">
+      <b>n</b> random points are generated within the image. The number of
+      points that fall inside the white spot is counted.
+    </p>
+  </div>
+  <div
+    class="min-w-[320px] bg-white p-4 rounded-lg shadow flex flex-col items-center border border-blue-200"
+  >
+    <span class="font-bold mb-2 text-blue-700">How is the area estimated?</span>
+    <p class="text-sm text-gray-700 text-center">
+      The estimated area is:<br /><b
+        >Area = (Total area) × (points inside / n)</b
+      ><br />
+      Where "Total area" is the width × height of the image, "points inside" is
+      the number of points that fall inside the spot, and "n" is the total
+      number of generated points.
+    </p>
+  </div>
+  <div
+    class="min-w-[320px] bg-white p-4 rounded-lg shadow flex flex-col items-center border border-blue-200"
+  >
+    <span class="font-bold mb-2 text-blue-700">What does the result mean?</span>
+    <p class="text-sm text-gray-700 text-center">
+      The result is an estimate of the spot area in square pixels. You can
+      compare different images or point configurations. If you repeat the
+      process, you will see that the result varies slightly due to randomness,
+      but stabilizes with more points.
+    </p>
+    <span class="text-xs text-gray-500 mt-2"
+      >Repeat the process to see how the result varies and experiment with
+      different images.</span
+    >
+  </div>
+</div>
