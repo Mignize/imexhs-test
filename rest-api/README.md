@@ -13,16 +13,6 @@ This project is a REST API built with FastAPI and SQLAlchemy, designed to run in
 
 2. The API will be available at `http://localhost:8000`.
 
-## Database Migrations
-
-- Create a new migration:
-
-  alembic revision --autogenerate -m "migration message"
-
-- Apply migrations:
-
-  alembic upgrade head
-
 ## Interactive Documentation
 
 - Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)

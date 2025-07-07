@@ -16,7 +16,7 @@ def get_or_create_device(db: Session, device_name: str):
 def create_elements(payload: schemas.Payload, db: Session = Depends(get_db)):
     for key, element in payload.root.items():
         avg_before, avg_after, size = utils.validate_and_normalize(element.data)
-        device = get_or_create_device(db, element.deviceName)
+        device = get_or_create_device(db, element.device_name)
 
         db_element = models.Element(
             id=element.id,
