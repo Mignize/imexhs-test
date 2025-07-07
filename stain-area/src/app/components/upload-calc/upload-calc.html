@@ -48,24 +48,21 @@
       }
     </div>
     @if (imageUrl) {
-    <div class="relative">
-      <img
-        [src]="imageUrl"
-        alt="Uploaded image"
-        [style.width.px]="imageData?.width || 160"
-        [style.height.px]="imageData?.height || 160"
-        class="object-contain border rounded shadow"
-      />
-      @if (pointsOverlay.length) {
-      <canvas
-        #overlayCanvas
-        [width]="imageData?.width || 160"
-        [height]="imageData?.height || 160"
-        [style.width.px]="imageData?.width || 160"
-        [style.height.px]="imageData?.height || 160"
-        class="absolute top-0 left-0 pointer-events-none"
-      ></canvas>
-      }
+    <div class="relative w-full max-w-[500px] mx-auto">
+      <div class="relative w-full">
+        <img
+          [src]="imageUrl"
+          alt="Uploaded image"
+          class="w-full h-auto object-contain border rounded shadow"
+          #imageElement
+        />
+        @if (pointsOverlay.length) {
+        <canvas
+          #overlayCanvas
+          class="absolute top-0 left-0 pointer-events-none w-full h-full"
+        ></canvas>
+        }
+      </div>
     </div>
     }
   </div>
